@@ -6,6 +6,7 @@ import java.util.Objects;
  * todo Document type User
  */
 public class User {
+	private long id;
 	private String login;
 	private String password;
 	private Role role;
@@ -13,10 +14,25 @@ public class User {
 	public User() {
 	}
 
+	public User(long id, String login, String password, Role role) {
+		this.id = id;
+		this.login = login;
+		this.password = password;
+		this.role = role;
+	}
+
 	public User(String login, String password, Role role) {
 		this.login = login;
 		this.password = password;
 		this.role = role;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getLogin() {
