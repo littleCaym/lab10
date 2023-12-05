@@ -1,7 +1,8 @@
-package com.example.lab10;
+package com.example.lab10.repository;
 
 import com.example.lab10.entity.Role;
 import com.example.lab10.entity.User;
+import com.example.lab10.validation.InputValidation;
 import com.example.lab10.validation.RoleValidation;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -158,6 +159,25 @@ public class UserList {
 			}
 		}
 		return false;
+	}
+
+	public static List<User> getUserListByPassword(String password) {
+		List<User> outputList = new ArrayList<>();
+		for (int i = 0; i < UserList.userArrayList.size(); i++) {
+			if(userArrayList.get(i).getPassword().equals(password)){
+				outputList.add(userArrayList.get(i));
+			}
+		}
+		return outputList;
+	}
+	public static List<User> getUserListByRole(Role role) {
+		List<User> outputList = new ArrayList<>();
+		for (int i = 0; i < UserList.userArrayList.size(); i++) {
+			if(userArrayList.get(i).getRole().equals(role)){
+				outputList.add(userArrayList.get(i));
+			}
+		}
+		return outputList;
 	}
 
 }

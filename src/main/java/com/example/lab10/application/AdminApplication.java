@@ -3,7 +3,8 @@ package com.example.lab10.application;
 import com.example.lab10.interfaces.CRUDInterface;
 import com.example.lab10.entity.Command;
 import com.example.lab10.entity.User;
-import com.example.lab10.UserList;
+import com.example.lab10.interfaces.SearchInterface;
+import com.example.lab10.repository.UserList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -12,10 +13,10 @@ public class AdminApplication {
 	public void show(){
 		boolean repeat = true;
 		while (repeat){
+			System.out.println();
 			System.out.println(
 					"ID" + " " + "Логин" + " " + "Пароль" + " " + "Роль"
 			);
-			System.out.println();
 			System.out.println("----------------------------------");
 			List<User> userList = UserList.getUserArrayList();
 			for (int i = 0; i < userList.size(); i++) {
@@ -26,7 +27,7 @@ public class AdminApplication {
 			}
 			System.out.println("----------------------------------");
 			System.out.println();
-			System.out.println("Введите операцию (CREATE/READ/UPDATE/DELETE,ESC):");
+			System.out.println("Введите операцию (CREATE/READ/UPDATE/DELETE/FIND) или ESC для выхода):");
 
 			String cmd = in.nextLine().toUpperCase();
 
@@ -41,6 +42,8 @@ public class AdminApplication {
 				CRUDInterface.updateUser();
 			} else if (Command.DELETE.toString().equals(cmd)){
 				CRUDInterface.deleteUser();
+			} else if (Command.FIND.toString().equals(cmd)){
+				SearchInterface.show();
 			} else {
 				System.out.println("Введена неверная команда");
 			}

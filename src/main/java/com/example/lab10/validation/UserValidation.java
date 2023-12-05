@@ -1,8 +1,7 @@
 package com.example.lab10.validation;
 
-import com.example.lab10.UserList;
+import com.example.lab10.repository.UserList;
 import com.example.lab10.entity.User;
-import com.example.lab10.validation.ResultValidation;
 import java.util.List;
 
 /**

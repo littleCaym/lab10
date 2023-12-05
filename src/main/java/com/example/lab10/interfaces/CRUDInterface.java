@@ -2,15 +2,12 @@ package com.example.lab10.interfaces;
 
 import com.example.lab10.validation.InputValidation;
 import com.example.lab10.validation.RoleValidation;
-import com.example.lab10.UserList;
+import com.example.lab10.repository.UserList;
 import com.example.lab10.entity.Role;
 import com.example.lab10.entity.User;
 import java.util.Scanner;
 
-/**
- * todo Запретить удалять админа
- * todo Не давать создавать юзера с тем же логином или id
- */
+//CREATE, READ, UPDATE, DELETE
 public class CRUDInterface {
 	public static void createUser() {
 		Scanner in = new Scanner(System.in);
@@ -143,6 +140,9 @@ public class CRUDInterface {
 					if(!UserList.updateUserRoleById(user.getId(), role)){
 						System.out.println("Ошибка обновления роли");
 					}
+				}
+				default -> {
+					System.out.println("Неверно указано поле для обновления");
 				}
 			}
 		}

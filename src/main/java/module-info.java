@@ -12,4 +12,6 @@ module com.example.lab10 {
 	opens com.example.lab10.interfaces to javafx.fxml;
 	exports com.example.lab10.validation;
 	opens com.example.lab10.validation to javafx.fxml;
+	exports com.example.lab10.repository;
+	opens com.example.lab10.repository to javafx.fxml;
 }
