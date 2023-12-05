@@ -1,5 +1,7 @@
 package com.example.lab10;
 
+import com.example.lab10.entity.Role;
+import com.example.lab10.entity.User;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

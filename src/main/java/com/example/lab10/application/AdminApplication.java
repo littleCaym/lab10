@@ -1,5 +1,9 @@
-package com.example.lab10;
+package com.example.lab10.application;
 
+import com.example.lab10.service.CRUDService;
+import com.example.lab10.entity.Command;
+import com.example.lab10.entity.User;
+import com.example.lab10.UserList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -28,13 +32,13 @@ public class AdminApplication {
 				System.out.println("До свидания!");
 				return;
 			} else if(Command.CREATE.toString().equals(cmd)){
-				CRUDUserInterface.createUser();
+				CRUDService.createUser();
 			} else if(Command.READ.toString().equals(cmd)){
-				CRUDUserInterface.readUser();
+				CRUDService.readUser();
 			} else if(Command.UPDATE.toString().equals(cmd)){
 				// TODO: 12/3/2023 Commands.UPDATE.toString().equals(cmd)
 			} else if (Command.DELETE.toString().equals(cmd)){
-				CRUDUserInterface.deleteUser();
+				CRUDService.deleteUser();
 			} else {
 				System.out.println("Введена неверная команда");
 			}

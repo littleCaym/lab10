@@ -1,5 +1,8 @@
 package com.example.lab10;
 
+import com.example.lab10.application.AdminApplication;
+import com.example.lab10.application.AuthApplication;
+import com.example.lab10.entity.User;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

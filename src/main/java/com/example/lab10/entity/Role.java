@@ -1,4 +1,4 @@
-package com.example.lab10;
+package com.example.lab10.entity;
 
 public enum Role {
 	NO_ROLE,

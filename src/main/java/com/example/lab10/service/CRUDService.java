@@ -1,12 +1,17 @@
-package com.example.lab10;
+package com.example.lab10.service;
 
+import com.example.lab10.validation.InputValidation;
+import com.example.lab10.validation.RoleValidation;
+import com.example.lab10.UserList;
+import com.example.lab10.entity.Role;
+import com.example.lab10.entity.User;
 import java.util.Scanner;
 
 /**
  * todo Запретить удалять админа
  *
  */
-public class CRUDUserInterface {
+public class CRUDService {
 	public static void createUser() {
 		Scanner in = new Scanner(System.in);
 		boolean repeat = true;

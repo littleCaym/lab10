@@ -1,4 +1,4 @@
-package com.example.lab10;
+package com.example.lab10.entity;
 
 import java.util.Objects;
 

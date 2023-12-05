@@ -1,5 +1,8 @@
-package com.example.lab10;
+package com.example.lab10.application;
 
+import com.example.lab10.validation.ResultValidation;
+import com.example.lab10.entity.User;
+import com.example.lab10.validation.UserValidation;
 import java.util.Scanner;
 
 // TODO: 12/3/2023 Добавить защиту от дураков

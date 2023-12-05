@@ -1,4 +1,4 @@
-package com.example.lab10;
+package com.example.lab10.validation;
 
 /**
  * todo Document type InputValidation
