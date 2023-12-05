@@ -1,4 +1,4 @@
-package com.example.lab10.service;
+package com.example.lab10.interfaces;
 
 import com.example.lab10.validation.InputValidation;
 import com.example.lab10.validation.RoleValidation;
@@ -9,9 +9,9 @@ import java.util.Scanner;
 
 /**
  * todo Запретить удалять админа
- *
+ * todo Не давать создавать юзера с тем же логином или id
  */
-public class CRUDService {
+public class CRUDInterface {
 	public static void createUser() {
 		Scanner in = new Scanner(System.in);
 		boolean repeat = true;
@@ -30,10 +30,13 @@ public class CRUDService {
 				System.out.println("Неверно указана роль пользователя!");
 				continue;
 			}
-			UserList.addUser(new User(
+			if(UserList.addUser(new User(
 					login, password, role
-			));
-			System.out.println("Пользователь успешно создан!");
+			)).equals(UserList.userEmpty)){
+				System.out.println("Логин занят");
+			} else {
+				System.out.println("Пользователь успешно создан!");
+			}
 			repeat = false;
 		}
 	}
@@ -52,7 +55,7 @@ public class CRUDService {
 					userInputString));
 		}
 		if (user.equals(UserList.userEmpty)){
-			System.out.println("Ошибка удаления пользователя");
+			System.out.println("Пользователь не найден.");
 		} else {
 			System.out.println("Пользователь " + user.getId() + ". " + user.getLogin() +" удален");
 		}
@@ -77,7 +80,7 @@ public class CRUDService {
 					userInputString));
 		}
 		if (user.equals(UserList.userEmpty)){
-			System.out.println("Ошибка удаления пользователя");
+			System.out.println("Пользователь не найден.");
 		} else {
 			System.out.println("--------------");
 			System.out.println("Логин: " + user.getLogin());
@@ -89,51 +92,59 @@ public class CRUDService {
 			String cmd = in.nextLine().toUpperCase();
 		}
 	}
-// TODO: 12/4/2023 updateUser 
-//	public static void updateUser(){
-//		Scanner in = new Scanner(System.in);
-//		System.out.print("Введите id или логин пользователя: ");
-//		String userInputString = in.nextLine();
-//
-//		if (userInputString == null || userInputString.isBlank()){
-//			System.out.println("Ошибка ввода");
-//			return;
-//		}
-//		User user;
-//		if (InputValidation.tryParseInt(userInputString, -1) == -1){
-//			//По логину
-//			user = UserList.getUser(userInputString);
-//		} else {
-//			//По ID
-//			user = UserList.getUser(Integer.parseInt(
-//					userInputString));
-//		}
-//		if (user.equals(UserList.userEmpty)){
-//			System.out.println("Ошибка удаления пользователя");
-//		} else {
-//			String login = user.getLogin();
-//			String password = user.getPassword();
-//			Role role = user.getRole();
-//			// while
-//			System.out.println("--------------");
-//			System.out.println("Логин: " + user.getLogin());
-//			System.out.println("Пароль: " + user.getPassword());
-//			System.out.println("Роль: " + user.getRole());
-//			System.out.println("--------------");
-//
-//			System.out.println("Введите, что необходимо изменить: LOGIN/PASSWORD/ROLE: ");
-//			String cmd = in.nextLine();
-//			switch (cmd.toUpperCase()){
-//				case "LOGIN":
-//					System.out.print("Новый логин: ");
-//					login
-//					if (login == null || login.isBlank()){
-//						System.out.println("Ошибка ввода");
-//						return;
-//					} else {
-//						login
-//					}
-//			}
-//		}
-//	}
+
+	public static void updateUser(){
+		Scanner in = new Scanner(System.in);
+		System.out.print("Введите id или логин пользователя: ");
+		String userInputString = in.nextLine();
+
+		if (userInputString == null || userInputString.isBlank()){
+			System.out.println("Ошибка ввода");
+			return;
+		}
+
+		User user;
+		if (InputValidation.tryParseInt(userInputString, -1) == -1){
+			//По логину
+			user = UserList.getUser(userInputString);
+		} else {
+			//По ID
+			user = UserList.getUser(Integer.parseInt(
+					userInputString));
+		}
+		if (user.equals(UserList.userEmpty)){
+			System.out.println("Ошибка при обновлении пользователя");
+		} else {
+			System.out.println("--------------");
+			System.out.println("Логин: " + user.getLogin());
+			System.out.println("Пароль: " + user.getPassword());
+			System.out.println("Роль: " + user.getRole());
+			System.out.println("--------------");
+			System.out.println("Введите поле для обновления: LOGIN, PASSWORD, ROLE");
+			userInputString = in.nextLine();
+			switch (userInputString.toUpperCase()){
+				case User.LOGIN -> {
+					System.out.print("Новый логин: ");
+					String login = in.nextLine();
+					if (!UserList.updateUserLoginById(user.getId(), login)){
+						System.out.println("Ошибка обновления логина");
+					}
+				}
+				case User.PASSWORD -> {
+					System.out.print("Новый пароль: ");
+					String password = in.nextLine();
+					if (!UserList.updateUserPasswordById(user.getId(), password)){
+						System.out.println("Ошибка обновления пароля");
+					}
+				}
+				case User.ROLE -> {
+					System.out.println("Новая роль:");
+					String role = in.nextLine().toUpperCase();
+					if(!UserList.updateUserRoleById(user.getId(), role)){
+						System.out.println("Ошибка обновления роли");
+					}
+				}
+			}
+		}
+	}
 }

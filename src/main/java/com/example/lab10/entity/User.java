@@ -6,6 +6,10 @@ import java.util.Objects;
  * todo Document type User
  */
 public class User {
+	public static final String ID = "ID";
+	public static final String LOGIN = "LOGIN";
+	public static final String PASSWORD = "PASSWORD";
+	public static final String ROLE = "ROLE";
 	private long id;
 	private String login;
 	private String password;

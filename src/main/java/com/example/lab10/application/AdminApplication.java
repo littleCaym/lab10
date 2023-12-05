@@ -1,6 +1,6 @@
 package com.example.lab10.application;
 
-import com.example.lab10.service.CRUDService;
+import com.example.lab10.interfaces.CRUDInterface;
 import com.example.lab10.entity.Command;
 import com.example.lab10.entity.User;
 import com.example.lab10.UserList;
@@ -15,6 +15,7 @@ public class AdminApplication {
 			System.out.println(
 					"ID" + " " + "Логин" + " " + "Пароль" + " " + "Роль"
 			);
+			System.out.println();
 			System.out.println("----------------------------------");
 			List<User> userList = UserList.getUserArrayList();
 			for (int i = 0; i < userList.size(); i++) {
@@ -24,6 +25,7 @@ public class AdminApplication {
 				);
 			}
 			System.out.println("----------------------------------");
+			System.out.println();
 			System.out.println("Введите операцию (CREATE/READ/UPDATE/DELETE,ESC):");
 
 			String cmd = in.nextLine().toUpperCase();
@@ -32,13 +34,13 @@ public class AdminApplication {
 				System.out.println("До свидания!");
 				return;
 			} else if(Command.CREATE.toString().equals(cmd)){
-				CRUDService.createUser();
+				CRUDInterface.createUser();
 			} else if(Command.READ.toString().equals(cmd)){
-				CRUDService.readUser();
+				CRUDInterface.readUser();
 			} else if(Command.UPDATE.toString().equals(cmd)){
-				// TODO: 12/3/2023 Commands.UPDATE.toString().equals(cmd)
+				CRUDInterface.updateUser();
 			} else if (Command.DELETE.toString().equals(cmd)){
-				CRUDService.deleteUser();
+				CRUDInterface.deleteUser();
 			} else {
 				System.out.println("Введена неверная команда");
 			}

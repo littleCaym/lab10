@@ -2,6 +2,7 @@ package com.example.lab10;
 
 import com.example.lab10.entity.Role;
 import com.example.lab10.entity.User;
+import com.example.lab10.validation.RoleValidation;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -18,7 +19,7 @@ public class UserList {
 		return userArrayList;
 	}
 
-	public static void addUser(User user){
+	public static User addUser(User user){
 		if (user.getId() == 0){
 			user.setId(userArrayList
 					.get(userArrayList.size()-1)
@@ -26,7 +27,12 @@ public class UserList {
 					+ 1
 			);
 		}
+		//Логин должен быть уникальным
+		if (!getUser(user.getLogin()).equals(userEmpty)){
+			return userEmpty;
+		}
 		userArrayList.add(user);
+		return user;
 	}
 
 	public static User removeUser(long id){
@@ -65,6 +71,93 @@ public class UserList {
 			}
 		}
 		return userEmpty;
+	}
+
+	public static boolean updateUserLoginById(long id, String newLogin){
+		if (newLogin.isEmpty()){
+			return false;
+		}
+		//логин должен быть уникальным
+		if(!getUser(newLogin).equals(userEmpty)){
+			return false;
+		}
+		for (int i = 0; i < userArrayList.size(); i++) {
+			if (userArrayList.get(i).getId() == id){
+				User user = userArrayList.get(i);
+				user.setLogin(newLogin);
+				userArrayList.set(i, user);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public static boolean updateUserLoginByLogin(String login, String newLogin){
+		if (newLogin.isEmpty()){
+			return false;
+		}
+		//логин должен быть уникальным
+		if(!getUser(newLogin).equals(userEmpty)){
+			return false;
+		}
+		for (int i = 0; i < userArrayList.size(); i++) {
+			if (userArrayList.get(i).getLogin().equals(login)){
+				User user = userArrayList.get(i);
+				user.setLogin(newLogin);
+				userArrayList.set(i, user);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public static boolean updateUserPasswordById(long id, String newPassword){
+		if (newPassword.isEmpty()){
+			return false;
+		}
+		for (int i = 0; i < userArrayList.size(); i++) {
+			if (userArrayList.get(i).getId() == id){
+				User user = userArrayList.get(i);
+				user.setPassword(newPassword);
+				userArrayList.set(i, user);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public static boolean updateUserPasswordByLogin(String login, String newPassword){
+		if (newPassword.isEmpty()){
+			return false;
+		}
+		for (int i = 0; i < userArrayList.size(); i++) {
+			if (userArrayList.get(i).getLogin().equals(login)){
+				User user = userArrayList.get(i);
+				user.setPassword(newPassword);
+				userArrayList.set(i, user);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public static boolean updateUserRoleById(long id, String newRoleString) {
+		if (newRoleString.isEmpty()){
+			return false;
+		}
+		Role newRole = RoleValidation.validateFromString(newRoleString);
+		if (newRole.equals(Role.NO_ROLE)){
+			return false;
+		}
+		for (int i = 0; i < userArrayList.size(); i++) {
+			if (userArrayList.get(i).getId() == id){
+				User user = userArrayList.get(i);
+				user.setRole(newRole);
+				userArrayList.set(i, user);
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
