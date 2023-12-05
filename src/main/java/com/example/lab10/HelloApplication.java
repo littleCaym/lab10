@@ -1,8 +1,6 @@
 package com.example.lab10;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -19,8 +17,8 @@ public class HelloApplication extends Application {
 	}
 
 	public static void main(String[] args) {
-		User user = new AuthInterface().show();
-		new AdministratorInterface().show();
+		User user = new AuthApplication().show();
+		new AdminApplication().show();
 
 //		switch (user.getRole()){
 //			case ADMINISTRATOR -> new AdministratorInterface().show(); break;

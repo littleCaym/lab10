@@ -4,7 +4,7 @@ package com.example.lab10;
  * todo Document type RoleValdiation
  */
 public class RoleValidation {
-	public static Role validateRoleFromString(String roleString){
+	public static Role validateFromString(String roleString){
 		if(Role.ADMINISTRATOR.toString().equals(roleString)){
 			return Role.ADMINISTRATOR;
 		}

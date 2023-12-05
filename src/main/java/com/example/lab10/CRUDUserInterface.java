@@ -1,6 +1,5 @@
 package com.example.lab10;
 
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -20,7 +19,7 @@ public class CRUDUserInterface {
 			System.out.print("Роль: ");
 			String roleString = in.nextLine().toUpperCase();
 
-			Role role = RoleValidation.validateRoleFromString(roleString.toUpperCase());
+			Role role = RoleValidation.validateFromString(roleString.toUpperCase());
 
 			if (role.equals(Role.NO_ROLE)) {
 				System.out.println("Неверно указана роль пользователя!");

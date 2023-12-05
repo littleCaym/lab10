@@ -5,13 +5,13 @@ import java.util.List;
 /**
  * todo Document type Auth
  */
-public class Auth {
+public class UserValidation {
 	private User currentUser;
 
-	public Auth(){
+	public UserValidation(){
 	}
 
-	public static ResultValidation userValidation(User user){
+	public static ResultValidation validate(User user){
 		List<User> users = UserList.getUserArrayList();
 		for (int i = 0; i < users.size(); i++) {
 			if(users.get(i).getLogin().equals(user.getLogin())){

@@ -1,11 +1,10 @@
 package com.example.lab10;
 
-import java.io.Console;
 import java.util.Scanner;
 
 // TODO: 12/3/2023 Добавить защиту от дураков
 // TODO: 12/3/2023 Добавить повторный ввод
-public class AuthInterface {
+public class AuthApplication {
 	private ResultValidation resultValidation;
 	public User show(){
 		while (true){
@@ -23,7 +22,7 @@ public class AuthInterface {
 			user.setLogin(login);
 			user.setPassword(password);
 
-			resultValidation = new Auth().userValidation(user);
+			resultValidation = new UserValidation().validate(user);
 
 			switch (resultValidation.getResponseCode()) {
 				case -1 -> {
